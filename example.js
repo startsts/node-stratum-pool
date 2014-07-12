@@ -175,20 +175,25 @@ var pool = Stratum.createPool({
     error: 'low share difficulty' //set if share is rejected for some reason
 */
 pool.on('share', function(isValidShare, isValidBlock, data){
-
-    if (isValidBlock)
-        console.log('Block found');
-    else if (isValidShare)
+    if (isValidShare)
         console.log('Valid share submitted');
     else if (data.blockHash)
         console.log('We thought a block was found but it was rejected by the daemon');
     else
-        console.log('Invalid share submitted')
+        console.log('Invalid share submitted');
 
     console.log('share data: ' + JSON.stringify(data));
 });
 
-
+/*
+    Called when a block, auxillery or primary, is found
+    coin: The symbol of the coin found. ex: 'LTC'
+    blockHash: The hash of the block found and confirmed (at least for now) is in the blockchain.
+*/
+pool.on('block', function(coin, blockHash) {
+    console.log('Mined block on ' + coin + ' network!');
+    console.log('HASH: ' + blockHash);
+});
 
 /*
 'severity': can be 'debug', 'warning', 'error'
