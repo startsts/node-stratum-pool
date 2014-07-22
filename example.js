@@ -190,9 +190,11 @@ pool.on('share', function(isValidShare, isValidBlock, data){
     coin: The symbol of the coin found. ex: 'LTC'
     blockHash: The hash of the block found and confirmed (at least for now) is in the blockchain.
 */
-pool.on('block', function(coin, blockHash) {
+pool.on('block', function(coin, height, blockHash, txHash) {
     console.log('Mined block on ' + coin + ' network!');
+    console.log('HEIGHT: ' + height);
     console.log('HASH: ' + blockHash);
+    console.log('TX: ' + txHash);
 });
 
 /*
